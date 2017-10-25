@@ -1,20 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CSUEGovClassAssignment</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>CSUEGovClassAssignment</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
+  <script>
+      $(document)
+          .ready(function() {
 
+              // fix main menu to page on passing
+              $('.main.menu').visibility({
+                  type: 'fixed'
+              });
+              // show dropdown on hover
+              $('.main.menu  .ui.dropdown').dropdown({
+                  on: 'hover'
+              });
+          })
+      ;
+  </script>
+</head>
 
-    <%= yield %>
-  </body>
+<body>
 
-  <footer>
+<div class="ui inverted main menu fixed" style="position: fixed; top: 0px; left: auto; z-index: 10;">
+  <div class="ui text container">
+    <div href="#" class="header item">
+      <img class="logo" src="assets/images/logo.png">
+      电子政务系统
+    </div>
+    <!--<a href="#" class="item">Blog</a>-->
+    <!--<a href="#" class="item">Articles</a>-->
+    <a href="#" class="ui right floated dropdown item" tabindex="0">
+      用户名称 <i class="dropdown icon"></i>
+      <div class="menu" tabindex="-1">
+        <div class="item">Link Item</div>
+        <div class="item">Link Item</div>
+        <div class="divider"></div>
+        <div class="header">Header Item</div>
+        <div class="item">
+          <i class="dropdown icon"></i>
+          Sub Menu
+          <div class="menu">
+            <div class="item">Link Item</div>
+            <div class="item">Link Item</div>
+          </div>
+        </div>
+        <div class="item">Link Item</div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="ui borderless main menu placeholder" style="display: block; visibility: hidden;">
+  <div class="ui text container">
+    <div href="#" class="header item">
+      <img class="logo" src="assets/images/logo.png">
+      Project Name
+    </div>
+    <a href="#" class="item">Blog</a>
+    <a href="#" class="item">Articles</a>
+    <a href="#" class="ui right floated dropdown item" tabindex="0">
+      Dropdown <i class="dropdown icon"></i>
+      <div class="menu" tabindex="-1">
+        <div class="item">Link Item</div>
+        <div class="item">Link Item</div>
+        <div class="divider"></div>
+        <div class="header">Header Item</div>
+        <div class="item">
+          <i class="dropdown icon"></i>
+          Sub Menu
+          <div class="menu">
+            <div class="item">Link Item</div>
+            <div class="item">Link Item</div>
+          </div>
+        </div>
+        <div class="item">Link Item</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="ui aligned container">
+  <%= yield %>
+</div>
+
+<div class="ui vertical footer segment">
+  <div class="ui center aligned container">
     <%= debug(params) if Rails.env.development? %>
-  </footer>
+  </div>
+</div>
+</body>
 </html>

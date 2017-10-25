@@ -11,28 +11,33 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= form.label :name %>
+    <div class="ui fluid labeled input">
+      <div class="ui label">
+        用户名
+      </div>
       <%= form.text_field :name, id: :user_name %>
     </div>
-
-    <div class="field">
-      <%= form.label :email %>
+    <br>
+    <div class="ui fluid labeled input">
+      <div class="ui label">
+        邮箱
+      </div>
       <%= form.text_field :email, id: :user_email %>
     </div>
-
-    <div class="field">
-      <%= form.label :password %>
+    <br>
+    <div class="ui fluid labeled input">
+      <div class="ui label">
+        密码
+      </div>
       <%= form.password_field :password, id: :user_password %>
     </div>
-
-
-    <div class="field">
-      <%= form.label :password_confirmation %>
+    <br>
+    <div class="ui fluid labeled input">
+      <div class="ui label">
+        重复密码
+      </div>
       <%= form.password_field :password_confirmation, id: :password_confirmation %>
     </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+    <br>
+    <%= form.submit :class => 'ui primary button', :value => '更新' %>
 <% end %>
