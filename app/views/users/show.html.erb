@@ -1,29 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>用户名:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>邮箱:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
+  <strong>密码:</strong>
+  <%= @user.password_digest %>
 </p>
 
-<p>
-  <strong>Createdate:</strong>
-  <%= @user.createdate %>
-</p>
-
-<p>
-  <strong>Modifieddate:</strong>
-  <%= @user.modifieddate %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
