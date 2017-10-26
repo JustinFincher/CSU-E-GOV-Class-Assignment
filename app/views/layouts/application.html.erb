@@ -28,30 +28,33 @@
 
 <div class="ui inverted main menu fixed" style="position: fixed; top: 0px; left: auto; z-index: 10;">
   <div class="ui text container">
-    <div href="#" class="header item">
-      <!--<img class="logo" src="assets/images/logo.png">-->
-      电子政务系统
-    </div>
+    <%= link_to '电子政务系统', '/', class: 'header item' %>
     <!--<a href="#" class="item">Blog</a>-->
     <!--<a href="#" class="item">Articles</a>-->
-    <a class="ui right floated dropdown item" tabindex="0">
-      用户名称 <i class="dropdown icon"></i>
-      <div class="menu" tabindex="-1">
-        <div class="item">Link Item</div>
-        <div class="item">Link Item</div>
-        <div class="divider"></div>
-        <div class="header">Header Item</div>
-        <div class="item">
+    <div class="ui right floated dropdown item" tabindex="0">
+
+      <% if logged_in? %>
+          <%= link_to  current_user.name, current_user %>
           <i class="dropdown icon"></i>
-          Sub Menu
-          <div class="menu">
+          <div class="menu" tabindex="-1">
             <div class="item">Link Item</div>
+            <div class="item">Link Item</div>
+            <div class="divider"></div>
+            <div class="header">Header Item</div>
+            <div class="item">
+              <i class="dropdown icon"></i>
+              Sub Menu
+              <div class="menu">
+                <div class="item">Link Item</div>
+                <div class="item">Link Item</div>
+              </div>
+            </div>
             <div class="item">Link Item</div>
           </div>
-        </div>
-        <div class="item">Link Item</div>
-      </div>
-    </a>
+      <% else %>
+          <%= link_to "Log in", login_path %>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="ui borderless main menu placeholder" style="display: block; visibility: hidden; margin: 0px;">

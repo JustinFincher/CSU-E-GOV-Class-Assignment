@@ -1,29 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="ui container">
+  <p id="notice"><%= notice %></p>
 
 
-<div class="ui card">
-  <div class="image">
-    <%= gravatar_for @user %>
-  </div>
-  <div class="content">
-    <div class="header">
-      <%= @user.name %>
+  <div class="ui card">
+    <div class="image">
+      <%= gravatar_for @user %>
     </div>
-    <div class="meta">
-      <%= @user.email %>
+    <div class="content">
+      <div class="header">
+        <%= @user.name %>
+      </div>
+      <div class="meta">
+        <%= @user.email %>
+      </div>
+      <div class="description">
+        <!--<%= @user.password_digest %>-->
+      </div>
     </div>
-    <div class="description">
-      <!--<%= @user.password_digest %>-->
-    </div>
-  </div>
-  <div class="extra content">
+    <div class="extra content">
       <span>
         <i class="time icon"></i>
         <%= @user.created_at %>
       </span>
+    </div>
   </div>
+
+
+  <%= link_to 'Edit', edit_user_path(@user), class: 'ui button' %>
+  <%= link_to 'Back', users_path , class: 'ui button' %>
 </div>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
