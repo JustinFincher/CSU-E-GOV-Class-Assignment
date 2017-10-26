@@ -1,19 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>用户名:</strong>
-  <%= @user.name %>
-</p>
 
-<p>
-  <strong>邮箱:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>密码:</strong>
-  <%= @user.password_digest %>
-</p>
+<div class="ui card">
+  <div class="image">
+    <%= gravatar_for @user %>
+  </div>
+  <div class="content">
+    <div class="header">
+      <%= @user.name %>
+    </div>
+    <div class="meta">
+      <%= @user.email %>
+    </div>
+    <div class="description">
+      <!--<%= @user.password_digest %>-->
+    </div>
+  </div>
+  <div class="extra content">
+      <span>
+        <i class="time icon"></i>
+        <%= @user.created_at %>
+      </span>
+  </div>
+</div>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

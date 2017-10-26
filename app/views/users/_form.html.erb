@@ -22,7 +22,14 @@
       <div class="ui label">
         邮箱
       </div>
-      <%= form.text_field :email, id: :user_email %>
+      <%= form.email_field :email, id: :user_email %>
+    </div>
+    <br>
+    <div class="ui fluid labeled input">
+      <div class="ui label">
+        权限
+      </div>
+      <%= form.number_field :permission, id: :user_permission %>
     </div>
     <br>
     <div class="ui fluid labeled input">
@@ -39,5 +46,5 @@
       <%= form.password_field :password_confirmation, id: :password_confirmation %>
     </div>
     <br>
-    <%= form.submit :class => 'ui primary button', :value => '更新' %>
+    <%= form.submit :class => 'ui primary button', :value => '确定' %>
 <% end %>

@@ -2,5 +2,11 @@
 
 <%= render 'form', user: @user %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<br>
+<button class="ui button">
+  <%= link_to '详情', @user %>
+</button>
+
+<button class="ui button">
+  <%= link_to '返回', users_path %>
+</button>
