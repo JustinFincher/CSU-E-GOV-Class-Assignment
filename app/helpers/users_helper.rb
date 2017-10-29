@@ -12,4 +12,6 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=256&d=identicon"
     image_tag(gravatar_url, alt: user.name, class:'ui huge avatar image')
   end
+
+
 end

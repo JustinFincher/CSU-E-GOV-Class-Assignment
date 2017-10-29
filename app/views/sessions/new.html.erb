@@ -1,24 +1,26 @@
-<% provide(:title, "Log in") %>
-<h1>登陆</h1>
+<div class="ui container" style="margin-top: 2rem">
+  <% provide(:title, "Log in") %>
+  <h1>登陆</h1>
 
-<div class="row">
-  <%= form_for(:session, url: login_path) do |f| %>
+  <div class="row">
+    <%= form_for(:session, url: login_path) do |f| %>
 
-      <div class="ui fluid labeled input">
-        <div class="ui label">
-          邮箱
+        <div class="ui fluid labeled input">
+          <div class="ui label">
+            邮箱
+          </div>
+          <%= f.email_field :email, class: 'form-control' %>
         </div>
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
-      <br>
-      <div class="ui fluid labeled input">
-        <div class="ui label">
-          密码
+        <br>
+        <div class="ui fluid labeled input">
+          <div class="ui label">
+            密码
+          </div>
+          <%= f.password_field :password, class: 'form-control' %>
         </div>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-      <br>
-      <%= f.submit "登陆", class: "ui primary button" %>
-  <% end %>
+        <br>
+        <%= f.submit "登陆", class: "ui primary button" %>
+    <% end %>
 
+  </div>
 </div>
