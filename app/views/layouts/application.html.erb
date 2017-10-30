@@ -7,21 +7,6 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <script>
-      $(document)
-          .ready(function() {
-
-              // fix main menu to page on passing
-              $('.main.menu').visibility({
-                  type: 'fixed'
-              });
-              // show dropdown on hover
-              $('.main.menu  .ui.dropdown').dropdown({
-                  on: 'hover'
-              });
-          })
-      ;
-  </script>
 </head>
 
 <body>
@@ -31,9 +16,9 @@
     <%= link_to '电子政务系统', '/', class: 'header item' %>
     <!--<a href="#" class="item">Blog</a>-->
     <!--<a href="#" class="item">Articles</a>-->
+    <% if logged_in? %>
     <div class="ui right floated dropdown item" tabindex="0">
 
-      <% if logged_in? %>
           <%= link_to  current_user.name, current_user %>
           <i class="dropdown icon"></i>
           <div class="menu" tabindex="-1">
@@ -49,12 +34,12 @@
                 <div class="item">Link Item</div>
               </div>
             </div>
-            <div class="item">Link Item</div>
+            <%= link_to "注销登录", logout_path, method: :delete, class: 'item' %>
           </div>
-      <% else %>
-          <%= link_to '登陆', login_path %>
-      <% end %>
     </div>
+      <% else %>
+          <%= link_to '登陆', login_path, class: 'ui right floated dropdown item', tabindex: "0" %>
+      <% end %>
   </div>
 </div>
 <div class="ui borderless main menu placeholder" style="display: block; visibility: hidden; margin: 0px;">
@@ -68,4 +53,13 @@
   </div>
 </div>
 </body>
+<script>
+    $('.main.menu').visibility({
+        type: 'fixed'
+    });
+    // show dropdown on hover
+    $('.main.menu  .ui.dropdown').dropdown({
+        on: 'hover'
+    });
+</script>
 </html>

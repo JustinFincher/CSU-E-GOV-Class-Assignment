@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/',to: 'home#show'
+  get '/',to: 'home#show',as: 'root_url'
 
   get    'backstage',   to: 'backstage#new'
   resources :users, path: "backstage/users" do

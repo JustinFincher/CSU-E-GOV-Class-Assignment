@@ -1,5 +1,9 @@
-<h1>注册用户</h1>
+<div class="ui container">
+  <p id="notice"><%= notice %></p>
+  <h1>注册用户</h1>
 
-<%= render 'form', user: @user %>
+  <%= render 'form', user: @user %>
 
-<%= link_to 'Back', users_path %>
+  <br>
+  <%= link_to '返回', users_path, class: 'ui button'%>
+</div>
