@@ -3,15 +3,17 @@ Rails.application.routes.draw do
   get '/',to: 'home#show',as: 'root_url'
 
   get    'backstage',   to: 'backstage#new'
-  resources :users, path: "backstage/users" do
+  resources :users, path: "backstage/users", as: 'backstage_users' do
     resources :documents
   end
 
-  resources :users, :only => [:index, :show] do
+  resources :documents, path: "backstage/documents", as: 'backstage_documents'
+
+  resources :users, :only => [:index, :show, :update, :edit] do
     resources :documents
   end
 
-  resources :documents
+
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

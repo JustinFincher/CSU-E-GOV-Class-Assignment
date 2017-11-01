@@ -1,4 +1,5 @@
 module UsersHelper
+include SessionsHelper
 
   # Returns the Gravatar for the given user.
   def gravatar_for(user)
@@ -13,12 +14,12 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class:'ui huge avatar image')
   end
 
-  def is_admin_or_upper?(user)
-    return user.permission <= UserPermission::admin
+  def is_admin_or_upper?
+    return current_user.permission <= UserPermission::admin
   end
 
   def is_root_or_upper?(user)
-    return user.permission <= UserPermission::root
+    return current_user.permission <= UserPermission::root
   end
 
   def should_create_root_user?

@@ -1,7 +1,7 @@
 <div class="ui container">
-  <h1>New Document</h1>
+  <h1>新建公文</h1>
 
-  <%= render 'form', document: @document %>
+  <%= render 'form', document: @document, user: @current_user %>
 
-  <%= link_to 'Back', documents_path %>
+  <%= link_to 'Back', user_documents_path %>
 </div>
