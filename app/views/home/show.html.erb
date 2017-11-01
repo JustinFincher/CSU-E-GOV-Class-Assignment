@@ -1,13 +1,20 @@
 
 <div>
-  <div class="ui inverted vertical masthead center aligned segment">
+  <div class="ui vertical masthead center aligned segment">
 
     <div class="ui text container">
-      <h1 class="ui inverted header">
+      <h1 class="ui header">
         电子政务系统
       </h1>
-      <%= link_to '注册', signup_path, class: 'ui huge button' %>
-      <%= link_to '登陆', login_path, class: 'ui huge primary button' %>
+
+      <% if logged_in? %>
+          <p>
+            欢迎回来，<%= @current_user.name %>
+          </p>
+      <% else %>
+          <%= link_to '注册', signup_path, class: 'ui huge button' %>
+          <%= link_to '登陆', login_path, class: 'ui huge primary button' %>
+      <% end %>
     </div>
 
   </div>

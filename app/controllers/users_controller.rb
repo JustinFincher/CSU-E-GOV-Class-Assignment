@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    flash[:green] = "您将是 ROOT 用户"
   end
 
   # GET /users/1/edit
@@ -24,14 +26,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @users = User.all
     @user = User.new(user_params)
+    if should_create_root_user?
+      @user.permission = UserPermission::root
+    end
 
     respond_to do |format|
       if @user.save
         log_in @user
-        redirect_to @user
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
-        # format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

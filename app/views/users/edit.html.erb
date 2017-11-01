@@ -1,12 +1,15 @@
-<h1>编辑用户：<%= @user.name %></h1>
+<div class="ui container">
+  <h1>编辑用户：<%= @user.name %></h1>
 
-<%= render 'form', user: @user %>
+  <%= render 'form', user: @user %>
 
-<br>
-<button class="ui button">
-  <%= link_to '详情', @user %>
-</button>
+  <br>
+  <button class="ui button">
+    <%= link_to '详情', @user %>
+  </button>
 
-<button class="ui button">
-  <%= link_to '返回', users_path %>
-</button>
+  <button class="ui button">
+    <%= link_to '返回', users_path %>
+  </button>
+
+</div>

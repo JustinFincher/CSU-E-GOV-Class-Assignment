@@ -13,5 +13,16 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class:'ui huge avatar image')
   end
 
+  def is_admin_or_upper?(user)
+    return user.permission <= UserPermission::admin
+  end
+
+  def is_root_or_upper?(user)
+    return user.permission <= UserPermission::root
+  end
+
+  def should_create_root_user?
+    return User.all.find_all{|u| u.permission == UserPermission::root}.empty?
+  end
 
 end

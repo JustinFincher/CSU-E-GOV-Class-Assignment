@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user
     else
       # Create an error message.
-      # flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:red] = '验证失败，请检查登陆用户名/密码'
       render 'new'
     end
   end

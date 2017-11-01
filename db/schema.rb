@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027024043) do
+ActiveRecord::Schema.define(version: 20171101064915) do
 
   create_table "documents", force: :cascade do |t|
     t.string "tite"
@@ -19,9 +19,8 @@ ActiveRecord::Schema.define(version: 20171027024043) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "userpermissions", force: :cascade do |t|
-    t.string "number"
-    t.integer "userpermission_number_type"
+  create_table "user_permissions", force: :cascade do |t|
+    t.integer "user_permission_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -2,6 +2,10 @@
   <p id="notice"><%= notice %></p>
   <h1>注册用户</h1>
 
+  <% if should_create_root_user? %>
+  您将是
+  <% end %>
+
   <%= render 'form', user: @user %>
 
   <br>

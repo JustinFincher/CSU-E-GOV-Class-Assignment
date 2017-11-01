@@ -15,6 +15,9 @@ gem 'therubyracer'
 # jquery
 gem 'jquery-rails'
 
+# enum
+gem 'ruby-enum', '~> 0.7.2',:git => 'git://github.com/dblock/ruby-enum.git'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record

@@ -24,13 +24,17 @@
       </div>
       <%= form.email_field :email, id: :user_email %>
     </div>
-    <br>
-    <div class="ui fluid labeled input">
-      <div class="ui label">
-        权限
-      </div>
-      <%= form.number_field :permission, id: :user_permission %>
-    </div>
+    <% if logged_in? && is_root_or_upper?(current_user) %>
+        <br>
+        <div class="ui fluid labeled input">
+          <div class="ui label">
+            权限
+          </div>
+          <%= form.select :user_permission_type, UserPermission.keys %>
+        </div>
+    <% else %>
+
+    <% end %>
     <br>
     <div class="ui fluid labeled input">
       <div class="ui label">
