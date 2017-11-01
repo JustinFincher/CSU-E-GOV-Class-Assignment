@@ -4,7 +4,11 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      @documents = Document.all
+    end
   end
 
   # GET /documents/1
@@ -14,7 +18,11 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      @document = Document.new
+    end
   end
 
   # GET /documents/1/edit

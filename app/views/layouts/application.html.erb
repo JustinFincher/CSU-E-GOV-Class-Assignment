@@ -14,16 +14,15 @@
 <div class="ui inverted main menu fixed" style="position: fixed; top: 0px; left: auto; z-index: 10;">
   <div class="ui text container">
     <%= link_to '电子政务系统', '/', class: 'header item' %>
-    <!--<a href="#" class="item">Blog</a>-->
-    <!--<a href="#" class="item">Articles</a>-->
     <% if logged_in? %>
+        <%= link_to "我的公文", user_documents_path(:user_id => current_user.id), class: 'item' %>
     <div class="ui right floated dropdown item" tabindex="0">
 
           <%= link_to  current_user.name, current_user %>
           <i class="dropdown icon"></i>
           <div class="menu" tabindex="-1">
-            <div class="item">我的</div>
-            <div class="divider"></div>
+            <!--<div class="item">我的</div>-->
+            <!--<div class="divider"></div>-->
             <div class="header">用户</div>
             <div class="item">设置</div>
             <% if logged_in? %>

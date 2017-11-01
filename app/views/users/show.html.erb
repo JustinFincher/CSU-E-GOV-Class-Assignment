@@ -1,31 +1,52 @@
 <div class="ui container">
   <p id="notice"><%= notice %></p>
 
-
-  <div class="ui card">
-    <div class="image">
-      <%= gravatar_for @user %>
-    </div>
-    <div class="content">
-      <div class="header">
-        <%= @user.name %>
-      </div>
-      <div class="meta">
-        <%= @user.email %>
-      </div>
-      <div class="description">
-        <!--<%= @user.password_digest %>-->
-      </div>
-    </div>
-    <div class="extra content">
+  <div class="ui two column stackable grid">
+    <div class="six wide column">
+      <div class="ui card fluid">
+        <div class="image">
+          <%= gravatar_for @user %>
+        </div>
+        <div class="content">
+          <div class="header">
+            <%= @user.name %>
+          </div>
+          <div class="meta">
+            <%= @user.email %>
+          </div>
+        </div>
+        <div class="extra content">
       <span>
-        <i class="time icon"></i>
-        <%= @user.created_at %>
+        <%= link_to '编辑', edit_user_path(@user), class: 'ui button' %>
+        <%= link_to '返回', users_path , class: 'ui button' %>
       </span>
+        </div>
+      </div>
+    </div>
+    <div class="ten wide column">
+      <div class="ui segment">
+        <div class="ui divided list">
+          <a class="item">
+            <div class="ui red horizontal label">邮箱</div>
+            <%= @user.email %>
+          </a>
+          <a class="item">
+            <div class="ui purple horizontal label">权限</div>
+            <%= UserPermission.key(@user.permission) %>
+          </a>
+          <a class="item">
+            <div class="ui grey horizontal label">创建于</div>
+            <%= @user.created_at %>
+          </a>
+          <a class="item">
+            <div class="ui grey horizontal label">更新于</div>
+            <%= @user.updated_at %>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
 
-  <%= link_to 'Edit', edit_user_path(@user), class: 'ui button' %>
-  <%= link_to 'Back', users_path , class: 'ui button' %>
+
 </div>

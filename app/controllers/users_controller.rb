@@ -16,7 +16,19 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    flash[:green] = "您将是 ROOT 用户"
+    if should_create_root_user?
+      if logged_in?
+        flash.now[:green] = "新用户将是 ROOT 用户"
+      else
+        flash.now[:yellow] = "您将是 ROOT 用户"
+      end
+    else
+      if logged_in?
+        flash.now[:green] = "新用户将是普通用户"
+      else
+        flash.now[:yellow] = "您将是普通用户"
+      end
+    end
   end
 
   # GET /users/1/edit
@@ -35,7 +47,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: '成功注册用户' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -49,7 +61,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: '成功更新用户' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -63,7 +75,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: '成功删除用户' }
       format.json { head :no_content }
     end
   end

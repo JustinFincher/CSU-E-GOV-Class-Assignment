@@ -11,8 +11,7 @@ Rails.application.routes.draw do
     resources :documents
   end
 
-
-
+  resources :documents
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
