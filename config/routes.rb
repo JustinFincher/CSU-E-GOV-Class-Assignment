@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :documents, path: "backstage/documents", as: 'backstage_documents'
 
-  resources :users, :only => [:index, :show, :update, :edit, :new] do
+  resources :users do
     resources :documents
   end
 

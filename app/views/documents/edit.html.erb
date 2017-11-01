@@ -3,7 +3,8 @@
 
   <%= render 'form', document: @document %>
 
-  <%= link_to 'Show', @document %> |
-  <%= link_to 'Back', documents_path %>
+  <%= link_to '展示', @document, :class => 'ui primary button'%>
+  <br>
+  <%= link_to '返回', documents_path :class => 'ui button'%>
 
 </div>

@@ -1,5 +1,4 @@
 <div class="ui container">
-  <p id="notice"><%= notice %></p>
 
   <h1>公文</h1>
 
@@ -17,9 +16,9 @@
         <tr>
           <td><%= document.tite %></td>
           <td><%= document.content %></td>
-          <td><%= link_to 'Show', document %></td>
-          <td><%= link_to 'Edit', edit_document_path(document) %></td>
-          <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', user_document_path(:id => document.id) %></td>
+          <td><%= link_to 'Edit', edit_user_document_path(:id => document.id) %></td>
+          <td><%= link_to 'Destroy', user_document_path(:id => document.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
     </tbody>

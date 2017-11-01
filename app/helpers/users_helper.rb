@@ -15,11 +15,17 @@ include SessionsHelper
   end
 
   def is_admin_or_upper?
-    return current_user.permission <= UserPermission::admin
+    if current_user != nil
+      return current_user.permission <= UserPermission::admin
+    end
+    return false
   end
 
   def is_root_or_upper?(user)
-    return current_user.permission <= UserPermission::root
+    if current_user != nil
+      return current_user.permission <= UserPermission::root
+    end
+    return false
   end
 
   def should_create_root_user?
