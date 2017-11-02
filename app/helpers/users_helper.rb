@@ -46,4 +46,20 @@ module UsersHelper
     return User.all.find_all{|u| u.permission == UserPermission::root}.empty?
   end
 
+  def users_by_permission_upper_than_permission(permission)
+    return User.all.select{ |user| user.permission < permission }
+  end
+
+  def users_by_permission_upper_than_user(lower_user)
+    return User.all.select{ |user| user.permission < lower_user.permission }
+  end
+
+  def permissions_upper_than_user_has(lower_user)
+    return UserPermission.keys.select{ |key| UserPermission::value(key) < lower_user.permission }
+  end
+
+  def permissions_upper_than_permission(permission)
+    return UserPermission.keys.select{ |key| UserPermission::value(key)  < permission }
+  end
+
 end

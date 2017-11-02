@@ -15,7 +15,7 @@
   <div class="ui text container">
     <%= link_to '电子政务系统', '/', class: 'header item' %>
     <% if logged_in? %>
-    <div class="ui right floated dropdown item" tabindex="0">
+        <div class="ui right floated dropdown item" tabindex="0">
 
           <%= link_to  current_user.name, current_user %>
           <i class="dropdown icon"></i>
@@ -33,10 +33,10 @@
             <div class="item">设置</div>
             <%= link_to "注销登录", logout_path, method: :delete, class: 'item' %>
           </div>
-    </div>
-      <% else %>
-          <%= link_to '登陆', login_path, class: 'ui right floated dropdown item', tabindex: "0" %>
-      <% end %>
+        </div>
+    <% else %>
+        <%= link_to '登陆', login_path, class: 'ui right floated dropdown item', tabindex: "0" %>
+    <% end %>
   </div>
 </div>
 <div class="ui borderless main menu placeholder" style="display: block; visibility: hidden; margin: 0px;"></div>
@@ -62,7 +62,6 @@
     $('.main.menu').visibility({
         type: 'fixed'
     });
-    // show dropdown on hover
     $('.main.menu  .ui.dropdown').dropdown({
         on: 'hover'
     });
@@ -73,5 +72,8 @@
                 .transition('fade')
             ;
         });
+    $('select.dropdown')
+        .dropdown()
+    ;
 </script>
 </html>

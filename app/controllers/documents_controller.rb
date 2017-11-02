@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
     if !logged_in?
       redirect_to login_path, notice: '您需要登陆'
     else
-      @documents = Document.all
+      @documents = Document.select { |doc| doc.user_id == current_user.id}
     end
   end
 
