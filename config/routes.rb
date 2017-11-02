@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   resources :documents, path: "backstage/documents", as: 'backstage_documents'
 
   resources :users do
-    resources :documents
+    resources :documents do
+      post 'hand_over_to_upper'
+    end
   end
-
-
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'

@@ -31,6 +31,15 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+     if !is_admin_or_upper?
+       if @document.user_id != current_user.id
+         redirect_to user_documents_path, notice: '您无权编辑他人公文'
+       end
+     end
+    end
   end
 
   # POST /documents
@@ -73,14 +82,21 @@ class DocumentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
+  def hand_over_to_upper
+    respond_to do | format |
+      format.html { redirect_to user_document_path, notice: '公文已经发往' }
+      format.json { render :show, status: :ok, location: @document }
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def document_params
-      params.require(:document).permit(:tite, :content)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def document_params
+    params.require(:document).permit(:tite, :content)
+  end
 end

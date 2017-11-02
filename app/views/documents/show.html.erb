@@ -14,26 +14,35 @@
   </h1>
 
   <p>
+    创建于 <%= @document.created_at %>
+  </p>
+
+  <p>
     <%= @document.content %>
   </p>
   <div class="ui horizontal divider">
     公文操作
   </div>
 
-  <form class="ui form">
-    <h4 class="ui dividing header">提交审核 & 批复</h4>
-    <div class="field">
-      <label>您当前权限为：<%= UserPermission.key(current_user.permission) %>，可以提交给 <%= permissions_upper_than_user_has(current_user) %> 权限用户</label>
-      <label>提交公文至：</label>
-      <div class="field">
-        <select class="ui search dropdown">
-          <% users_by_permission_upper_than_user(current_user).each do |user| %>
-              <option value=<%= user.id %>><%= user.name %></option>
-          <% end %>
-        </select>
-      </div>
-    </div>
-    <div class="ui button" tabindex="0">提交</div>
-  </form>
+  <%= form_with(model: @document, local: true, url: user_document_hand_over_to_upper_path(:document_id => :id)) do |form| %>
+      <form class="ui form">
+        <h4 class="ui dividing header">提交审核 & 批复</h4>
+        <div class="field">
+          <label>您当前权限为：<%= UserPermission.key(current_user.permission) %>，可以提交给
+            <% permissions_upper_than_user_has(current_user).each do |permission| %>
+                <%= permission %>
+            <% end %>
+            权限用户</label>
+          <label>提交公文至：</label>
+          <div class="field">
+            <%= form.select("hand_over_to_person_id", users_by_permission_upper_than_user(current_user).collect {|p| [ p.name.to_s <<  ' 权限：' <<  UserPermission.key(p.permission).to_s, p.id ] }, {include_blank: true}, class:'ui search dropdown') %>
+          </div>
+        </div>
+        <br>
+        <div class="actions">
+          <%= form.submit :class => 'ui primary button', :value => '提交' %>
+        </div>
+      </form>
+  <% end %>
 
 </div>
