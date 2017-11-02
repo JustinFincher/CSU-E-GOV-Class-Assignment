@@ -1,17 +1,15 @@
 <div class="ui container">
   <p id="notice"><%= notice %></p>
 
-  <p>
-    <strong>Tite:</strong>
+  <h1>
     <%= @document.tite %>
-  </p>
+  </h1>
 
   <p>
-    <strong>Content:</strong>
     <%= @document.content %>
   </p>
 
-  <%= link_to 'Edit', edit_document_path(@document) %> |
-  <%= link_to 'Back', documents_path %>
+  <%= link_to '编辑', edit_user_document_path(@document), class: 'ui button' %>
+  <%= link_to '返回', user_documents_path , class: 'ui button' %>
 
 </div>

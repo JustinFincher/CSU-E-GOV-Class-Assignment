@@ -14,6 +14,10 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+    end
   end
 
   # GET /documents/new
@@ -50,7 +54,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.html { redirect_to user_documents_path, notice: 'Document was successfully updated.' }
         format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit }
@@ -64,7 +68,7 @@ class DocumentsController < ApplicationController
   def destroy
     @document.destroy
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
+      format.html { redirect_to user_documents_path, notice: '公文被删除' }
       format.json { head :no_content }
     end
   end

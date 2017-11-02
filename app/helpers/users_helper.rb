@@ -1,5 +1,5 @@
 module UsersHelper
-include SessionsHelper
+  include SessionsHelper
 
   # Returns the Gravatar for the given user.
   def gravatar_for(user)
@@ -14,6 +14,20 @@ include SessionsHelper
     image_tag(gravatar_url, alt: user.name, class:'ui huge avatar image')
   end
 
+  def is_admin_or_upper_for?(user)
+    if user != nil
+      return user.permission <= UserPermission::admin
+    end
+    return false
+  end
+
+  def is_root_or_upper_for?(user)
+    if user != nil
+      return user.permission <= UserPermission::root
+    end
+    return false
+  end
+
   def is_admin_or_upper?
     if current_user != nil
       return current_user.permission <= UserPermission::admin
@@ -21,7 +35,7 @@ include SessionsHelper
     return false
   end
 
-  def is_root_or_upper?(user)
+  def is_root_or_upper?
     if current_user != nil
       return current_user.permission <= UserPermission::root
     end
