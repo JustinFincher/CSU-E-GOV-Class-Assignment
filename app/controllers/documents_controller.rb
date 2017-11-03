@@ -52,7 +52,9 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
-    @document.user_id = current_user.id
+    if @document.user_id == nil
+      @document.user_id = current_user.id
+    end
     respond_to do |format|
       if @document.save
         format.html { redirect_to user_documents_path, notice: 'Document was successfully created.' }
@@ -97,10 +99,19 @@ class DocumentsController < ApplicationController
         @document = Document.find doc_id
       end
     end
+
+    hand_over_to_person_id = params[:hand_over_to_person_id]
+    hand_over_person = User.find hand_over_to_person_id
+    hand_over_person.to_review_documents.push(@document.id.to_s)
+    hand_over_person.to_review_documents = hand_over_person.to_review_documents.uniq
+    if hand_over_person.save
+    end
+
     respond_to do | format |
-      format.html { redirect_to user_document_path(:id => @document.id), notice: '公文已经发往' }
+      format.html { redirect_to user_document_path(:id => @document.id), notice: '公文已经发往 '<<hand_over_person.name.to_s }
       format.json { render :show, status: :ok, location: @document }
     end
+
   end
 
   private

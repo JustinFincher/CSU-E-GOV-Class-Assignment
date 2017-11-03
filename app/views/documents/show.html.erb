@@ -24,7 +24,7 @@
     公文操作
   </div>
 
-  <%= form_with(model: @document,:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+  <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
       <form class="ui form">
         <h4 class="ui dividing header">提交审核 & 批复</h4>
         <div class="field">

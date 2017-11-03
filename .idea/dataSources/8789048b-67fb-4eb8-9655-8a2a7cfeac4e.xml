@@ -57,10 +57,12 @@
     <column id="20" parent="7" name="tite">
       <Position>1</Position>
       <DataType>varchar|0</DataType>
+      <DefaultExpression>NULL</DefaultExpression>
     </column>
     <column id="21" parent="7" name="content">
       <Position>2</Position>
       <DataType>varchar|0</DataType>
+      <DefaultExpression>NULL</DefaultExpression>
     </column>
     <column id="22" parent="7" name="created_at">
       <Position>3</Position>
@@ -176,7 +178,13 @@
       <DataType>varchar|0</DataType>
       <DefaultExpression>NULL</DefaultExpression>
     </column>
-    <key id="48" parent="12">
+    <column id="48" parent="12" name="to_review_documents">
+      <Position>7</Position>
+      <DataType>text|0</DataType>
+      <DefaultExpression>&apos;--- []
+&apos;</DefaultExpression>
+    </column>
+    <key id="49" parent="12">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101103517) do
+ActiveRecord::Schema.define(version: 20171103030655) do
 
   create_table "documents", force: :cascade do |t|
     t.string "tite"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20171101103517) do
     t.datetime "updated_at", null: false
     t.integer "permission", default: 100
     t.string "password_digest"
+    t.text "to_review_documents", default: "--- []\n"
   end
 
 end
