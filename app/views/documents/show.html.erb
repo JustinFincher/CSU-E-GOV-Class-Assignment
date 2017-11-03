@@ -24,7 +24,7 @@
     公文操作
   </div>
 
-  <%= form_with(model: @document, local: true, url: user_document_hand_over_to_upper_path(:document_id => :id)) do |form| %>
+  <%= form_with(model: @document,:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
       <form class="ui form">
         <h4 class="ui dividing header">提交审核 & 批复</h4>
         <div class="field">
@@ -34,6 +34,7 @@
             <% end %>
             权限用户</label>
           <label>提交公文至：</label>
+          <br><br>
           <div class="field">
             <%= form.select("hand_over_to_person_id", users_by_permission_upper_than_user(current_user).collect {|p| [ p.name.to_s <<  ' 权限：' <<  UserPermission.key(p.permission).to_s, p.id ] }, {include_blank: true}, class:'ui search dropdown') %>
           </div>

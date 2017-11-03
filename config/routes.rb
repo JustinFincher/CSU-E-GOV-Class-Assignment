@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :documents, path: "backstage/documents", as: 'backstage_documents'
 
   resources :users do
-    resources :documents do
+    # post 'documents/:id/hand_over_to_upper', to: 'document#hand_over_to_upper'
+    resources :documents,param: :id do
       post 'hand_over_to_upper'
     end
   end

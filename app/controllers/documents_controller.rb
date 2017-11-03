@@ -17,6 +17,12 @@ class DocumentsController < ApplicationController
     if !logged_in?
       redirect_to login_path, notice: '您需要登陆'
     else
+      doc_id = params[:document_id]
+      # logger.debug 'doc_id'
+      # logger.debug doc_id
+      if doc_id != nil
+        @document = Document.find doc_id
+      end
     end
   end
 
@@ -83,8 +89,16 @@ class DocumentsController < ApplicationController
   end
 
   def hand_over_to_upper
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      doc_id = params[:document_id]
+      if doc_id != nil
+        @document = Document.find doc_id
+      end
+    end
     respond_to do | format |
-      format.html { redirect_to user_document_path, notice: '公文已经发往' }
+      format.html { redirect_to user_document_path(:id => @document.id), notice: '公文已经发往' }
       format.json { render :show, status: :ok, location: @document }
     end
   end
