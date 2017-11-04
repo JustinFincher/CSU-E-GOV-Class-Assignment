@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Rails CSU-E-GOV-Class-Assignment: development" uuid="8789048b-67fb-4eb8-9655-8a2a7cfeac4e">
+    <data-source source="LOCAL" name="Rails CSU-E-GOV-Class-Assignment: development" uuid="fd3df4fe-e456-443b-b096-deb2dcdded45">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

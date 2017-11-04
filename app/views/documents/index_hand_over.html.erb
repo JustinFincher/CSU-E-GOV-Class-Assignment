@@ -1,0 +1,21 @@
+<div class="ui container">
+  <h1>待审核的公文</h1>
+
+
+  <div class="ui middle aligned divided list">
+    <% @documents.each do |document| %>
+        <div class="item">
+          <div class="right floated content"></div>
+          <div class="header">
+            <%= link_to document.tite, user_document_path(:id => document.id) %>
+          </div>
+          <div class="content">
+            <p>内容：<%= document.content %></p>
+            <p>发件人：<%= User.find(document.user_id).name %></p>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+  <br>
+</div>

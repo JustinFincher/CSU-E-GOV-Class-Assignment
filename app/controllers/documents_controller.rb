@@ -1,3 +1,5 @@
+include UsersHelper
+
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
@@ -8,6 +10,14 @@ class DocumentsController < ApplicationController
       redirect_to login_path, notice: '您需要登陆'
     else
       @documents = Document.select { |doc| doc.user_id == current_user.id}
+    end
+  end
+
+  def index_hand_over
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      @documents = Document.select { |doc| current_user.to_review_documents.include?(doc.id.to_s) }
     end
   end
 
@@ -112,6 +122,10 @@ class DocumentsController < ApplicationController
       format.json { render :show, status: :ok, location: @document }
     end
 
+  end
+
+  def submit_review_by_upper
+    
   end
 
   private

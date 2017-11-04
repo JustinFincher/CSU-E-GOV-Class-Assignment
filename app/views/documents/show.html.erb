@@ -24,26 +24,58 @@
     公文操作
   </div>
 
-  <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
-      <form class="ui form">
-        <h4 class="ui dividing header">提交审核 & 批复</h4>
-        <div class="field">
-          <label>您当前权限为：<%= UserPermission.key(current_user.permission) %>，可以提交给
-            <% permissions_upper_than_user_has(current_user).each do |permission| %>
-                <%= permission %>
-            <% end %>
-            权限用户</label>
-          <label>提交公文至：</label>
-          <br><br>
-          <div class="field">
-            <%= form.select("hand_over_to_person_id", users_by_permission_upper_than_user(current_user).collect {|p| [ p.name.to_s <<  ' 权限：' <<  UserPermission.key(p.permission).to_s, p.id ] }, {include_blank: true}, class:'ui search dropdown') %>
+  <% if belongs_to_current_user?(@document) %>
+      <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+          <div class="ui form">
+            <h4 class="ui dividing header">提交审核 & 批复</h4>
+            <div class="field">
+              <label>您当前权限为：<%= UserPermission.key(current_user.permission) %>，可以提交给
+                <% permissions_upper_than_user_has(current_user).each do |permission| %>
+                    <%= permission %>
+                <% end %>
+                权限用户</label>
+              <label>提交公文至：</label>
+              <br><br>
+              <div class="field">
+                <%= form.select("hand_over_to_person_id", users_by_permission_upper_than_user(current_user).collect {|p| [ p.name.to_s <<  ' 权限：' <<  UserPermission.key(p.permission).to_s, p.id ] }, {include_blank: true}, class:'ui search dropdown') %>
+              </div>
+            </div>
+            <br>
+            <div class="actions">
+              <%= form.submit :class => 'ui primary button', :value => '提交' %>
+            </div>
           </div>
-        </div>
-        <br>
-        <div class="actions">
-          <%= form.submit :class => 'ui primary button', :value => '提交' %>
-        </div>
-      </form>
+      <% end %>
   <% end %>
+
+  <% if current_user_has_auth_to_review?(@document) %>
+      对 <%= User.find(@document.user_id).name %> 的此文档进行审核 & 批复
+      <br>
+      <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+          <div class="ui form">
+
+            <h4 class="ui dividing header">审核 & 批复</h4>
+
+            <div class="inline field">
+              <div class="ui slider checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <label>是否审核通过</label>
+              </div>
+              <label></label>
+            </div>
+
+            <div class="required field">
+              <label>批复</label>
+              <%= form.text_area :content, id: :document_review %>
+            </div>
+
+            <br>
+            <div class="actions">
+              <%= form.submit :class => 'ui primary button', :value => '提交' %>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+
 
 </div>

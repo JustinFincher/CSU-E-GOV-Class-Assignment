@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   resources :documents, path: "backstage/documents", as: 'backstage_documents'
 
   resources :users do
-    # post 'documents/:id/hand_over_to_upper', to: 'document#hand_over_to_upper'
+
+    get 'documents/index_hand_over'
     resources :documents,param: :id do
       post 'hand_over_to_upper'
+      post 'submit_review_by_upper'
     end
   end
 
