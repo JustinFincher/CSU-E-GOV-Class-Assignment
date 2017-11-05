@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105060900) do
+ActiveRecord::Schema.define(version: 20171105094217) do
 
   create_table "documents", force: :cascade do |t|
     t.string "tite"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20171105060900) do
     t.integer "user_id"
     t.boolean "review_state", default: false
     t.text "reviews", default: "--- []\n"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_permissions", force: :cascade do |t|
@@ -36,6 +44,7 @@ ActiveRecord::Schema.define(version: 20171105060900) do
     t.integer "permission", default: 100
     t.string "password_digest"
     t.text "to_review_documents", default: "--- []\n"
+    t.text "reviewed_documents", default: "--- []\n"
   end
 
 end

@@ -31,7 +31,7 @@
               </a>
               <a class="item">
                 <div class="ui purple horizontal label">权限</div>
-                <%= user.permission %>
+                <%= UserPermission::key(user.permission) %>
               </a>
               <a class="item">
                 <div class="ui grey horizontal label">创建于</div>

@@ -14,6 +14,12 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class:'ui huge avatar image')
   end
 
+  def gravatar_small_round_for(user)
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=64d=identicon"
+    image_tag(gravatar_url, alt: user.name, class:'ui avatar image')
+  end
+
   def is_admin_or_upper_for?(user)
     if user != nil
       return user.permission <= UserPermission::admin

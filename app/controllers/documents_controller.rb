@@ -21,6 +21,14 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def index_reviewed
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      @documents = Document.select { |doc| current_user.reviewed_documents.include?(doc.id.to_s) }
+    end
+  end
+
   # GET /documents/1
   # GET /documents/1.json
   def show
@@ -134,19 +142,28 @@ class DocumentsController < ApplicationController
       end
     end
 
-    doc_review = params[:review_content] << ' -- ' << current_user.name
+    doc_review = params[:review_content]
     doc_opinion = params[:review_opinion]
+
+    review = Review.new
+    review.user_id = current_user.id
+    review.document_id = @document.id
+    review.content = doc_review
+    review.save
 
     logger.info doc_review
     logger.info doc_opinion
+    logger.info review
 
     @document.review_state = doc_opinion
-    @document.reviews.push(doc_review)
+    @document.reviews.push(review.id)
 
     is_save_success = @document.save
     if is_save_success
       # remove doc in user_to_review
       current_user.to_review_documents.delete(@document.id.to_s)
+      current_user.reviewed_documents.push(@document.id.to_s)
+      is_save_success = current_user.save
     end
 
     respond_to do | format |

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users do
 
     get 'documents/index_hand_over'
+    get 'documents/index_reviewed'
     resources :documents,param: :id do
       post 'hand_over_to_upper'
       post 'submit_review_by_upper'

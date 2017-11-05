@@ -16,6 +16,7 @@
                   <div class="menu">
                     <%= link_to '我的公文(' << Document.select {|doc| doc.user_id == current_user.id}.size.to_s << ')',user_documents_path(:user_id => current_user.id), class:'item' %>
                     <%= link_to '待审核的公文(' << current_user.to_review_documents.size.to_s << ')', user_documents_index_hand_over_path(:user_id => current_user.id), class:'item' %>
+                    <%= link_to '已审核的公文(' << current_user.reviewed_documents.size.to_s << ')', user_documents_index_reviewed_path(:user_id => current_user.id), class:'item' %>
                     <a class="item">待发回的公文(0)</a>
                   </div>
                 </div>
@@ -23,8 +24,8 @@
                 <div class="item">
                   <div class="header">后台管理</div>
                   <div class="menu">
-                    <a class="item">用户管理</a>
-                    <a class="item">公文管理</a>
+                    <%= link_to '用户管理', backstage_users_path, class: 'item' %>
+                    <%= link_to '公文管理', backstage_documents_path, class: 'item' %>
                   </div>
                 </div>
             <% end %>

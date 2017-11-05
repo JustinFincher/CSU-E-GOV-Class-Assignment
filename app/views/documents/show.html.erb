@@ -25,7 +25,7 @@
   </div>
 
   <% if belongs_to_current_user?(@document) %>
-      <%= form_with(:method => :POST, local: true, url: us99er_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+      <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
           <div class="ui form">
             <h4 class="ui dividing header">提交审核 & 批复</h4>
             <div class="field">
@@ -76,6 +76,30 @@
           </div>
       <% end %>
   <% end %>
+
+  <div class="ui horizontal divider">
+    公文状态
+  </div>
+  <% if @document.review_state %>
+      已通过
+  <% else %>
+      未通过
+  <% end %>
+
+  <div class="ui horizontal divider">
+    公文批复
+  </div>
+  <div class="ui relaxed list">
+    <% @document.reviews.map{ |review_id| Review.find(review_id) }.each do |review_item| %>
+        <div class="item">
+          <%= gravatar_small_round_for(User.find(review_item.user_id)) %>
+          <div class="content">
+            <a class="header"><%= User.find(review_item.user_id).name %></a>
+            <div class="description"><%= review_item.content %></div>
+          </div>
+        </div>
+    <% end %>
+  </div>
 
 
 </div>
