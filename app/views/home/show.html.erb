@@ -16,8 +16,7 @@
                   <div class="menu">
                     <%= link_to '我的公文(' << Document.select {|doc| doc.user_id == current_user.id}.size.to_s << ')',user_documents_path(:user_id => current_user.id), class:'item' %>
                     <%= link_to '待审核的公文(' << current_user.to_review_documents.size.to_s << ')', user_documents_index_hand_over_path(:user_id => current_user.id), class:'item' %>
-                    <a class="item">待批复的公文</a>
-                    <a class="item">待发回的公文</a>
+                    <a class="item">待发回的公文(0)</a>
                   </div>
                 </div>
             <% if is_admin_or_upper? %>

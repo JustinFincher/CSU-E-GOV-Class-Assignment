@@ -134,7 +134,7 @@ class DocumentsController < ApplicationController
       end
     end
 
-    doc_review = params[:review_content]
+    doc_review = params[:review_content] << ' -- ' << current_user.name
     doc_opinion = params[:review_opinion]
 
     logger.info doc_review
@@ -143,8 +143,14 @@ class DocumentsController < ApplicationController
     @document.review_state = doc_opinion
     @document.reviews.push(doc_review)
 
+    is_save_success = @document.save
+    if is_save_success
+      # remove doc in user_to_review
+      current_user.to_review_documents.delete(@document.id.to_s)
+    end
+
     respond_to do | format |
-      if @document.save
+      if is_save_success
         format.html { redirect_to user_documents_index_hand_over_path, notice: '公文已经审批' }
         format.json { render :show, status: :ok, location: @document }
       else
