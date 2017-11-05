@@ -50,11 +50,11 @@ class DocumentsController < ApplicationController
     if !logged_in?
       redirect_to login_path, notice: '您需要登陆'
     else
-     if !is_admin_or_upper?
-       if @document.user_id != current_user.id
-         redirect_to user_documents_path, notice: '您无权编辑他人公文'
-       end
-     end
+      if !is_admin_or_upper?
+        if @document.user_id != current_user.id
+          redirect_to user_documents_path, notice: '您无权编辑他人公文'
+        end
+      end
     end
   end
 
@@ -125,7 +125,33 @@ class DocumentsController < ApplicationController
   end
 
   def submit_review_by_upper
-    
+    if !logged_in?
+      redirect_to login_path, notice: '您需要登陆'
+    else
+      doc_id = params[:document_id]
+      if doc_id != nil
+        @document = Document.find doc_id
+      end
+    end
+
+    doc_review = params[:review_content]
+    doc_opinion = params[:review_opinion]
+
+    logger.info doc_review
+    logger.info doc_opinion
+
+    @document.review_state = doc_opinion
+    @document.reviews.push(doc_review)
+
+    respond_to do | format |
+      if @document.save
+        format.html { redirect_to user_documents_index_hand_over_path, notice: '公文已经审批' }
+        format.json { render :show, status: :ok, location: @document }
+      else
+        format.html { render :new }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

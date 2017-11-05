@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103030655) do
+ActiveRecord::Schema.define(version: 20171105060900) do
 
   create_table "documents", force: :cascade do |t|
     t.string "tite"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20171103030655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.boolean "review_state", default: false
+    t.text "reviews", default: "--- []\n"
   end
 
   create_table "user_permissions", force: :cascade do |t|

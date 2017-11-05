@@ -25,7 +25,7 @@
   </div>
 
   <% if belongs_to_current_user?(@document) %>
-      <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+      <%= form_with(:method => :POST, local: true, url: us99er_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
           <div class="ui form">
             <h4 class="ui dividing header">提交审核 & 批复</h4>
             <div class="field">
@@ -49,24 +49,24 @@
   <% end %>
 
   <% if current_user_has_auth_to_review?(@document) %>
-      对 <%= User.find(@document.user_id).name %> 的此文档进行审核 & 批复
       <br>
-      <%= form_with(:method => :POST, local: true, url: user_document_hand_over_to_upper_path(:document_id => @document.id)) do |form| %>
+      <%= form_with(:method => :POST, local: true, url: user_document_submit_review_by_upper_path(:document_id => @document.id)) do |form| %>
           <div class="ui form">
 
             <h4 class="ui dividing header">审核 & 批复</h4>
+            <p>对 <%= User.find(@document.user_id).name %> 的此文档进行审核 & 批复</p>
 
             <div class="inline field">
               <div class="ui slider checkbox">
-                <input type="checkbox" tabindex="0" class="hidden">
+                <%= form.check_box :review_opinion, class:'hidden', id: :document_opinion %>
                 <label>是否审核通过</label>
               </div>
               <label></label>
             </div>
 
-            <div class="required field">
+            <div class="field">
               <label>批复</label>
-              <%= form.text_area :content, id: :document_review %>
+              <%= form.text_area :review_content, id: :document_review %>
             </div>
 
             <br>
