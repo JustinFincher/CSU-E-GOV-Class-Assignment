@@ -12,7 +12,18 @@
   <h1>
     <%= @document.tite %>
   </h1>
-
+  <% if @document.tags.any? %>
+      收录于 
+      <div class="ui celled horizontal list">
+        <% @document.tags.each do |tag| %>
+            <% if tag != '' %>
+                <% logger.info tag %>
+                <% logger.info tag.class %>
+                <div class="item"><%= DocumentTag.key(tag.to_i) %></div>
+            <% end %>
+        <% end %>
+      </div>
+  <% end %>
   <p>
     创建于 <%= @document.created_at %>
   </p>

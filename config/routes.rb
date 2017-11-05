@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :documents, path: "backstage/documents", as: 'backstage_documents'
 
   resources :users do
-
     get 'documents/index_hand_over'
     get 'documents/index_reviewed'
     resources :documents,param: :id do

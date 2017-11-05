@@ -87,6 +87,10 @@ class DocumentsController < ApplicationController
   # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json
   def update
+
+    logger.info params[:tags]
+
+
     respond_to do |format|
       if @document.update(document_params)
         format.html { redirect_to user_documents_path, notice: 'Document was successfully updated.' }
@@ -185,6 +189,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:tite, :content)
+    params.require(:document).permit(:tite, :content, {:tags => []})
   end
 end

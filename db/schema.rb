@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105094217) do
+ActiveRecord::Schema.define(version: 20171105145203) do
+
+  create_table "document_tags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.string "tite"
@@ -20,6 +25,7 @@ ActiveRecord::Schema.define(version: 20171105094217) do
     t.integer "user_id"
     t.boolean "review_state", default: false
     t.text "reviews", default: "--- []\n"
+    t.text "tags", default: "--- []\n"
   end
 
   create_table "reviews", force: :cascade do |t|
