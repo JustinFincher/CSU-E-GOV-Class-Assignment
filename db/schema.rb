@@ -36,12 +36,6 @@ ActiveRecord::Schema.define(version: 20171105145203) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_permissions", force: :cascade do |t|
-    t.integer "user_permission_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
